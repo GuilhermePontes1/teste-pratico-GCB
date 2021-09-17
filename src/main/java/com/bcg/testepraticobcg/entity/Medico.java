@@ -27,9 +27,22 @@ public class Medico implements Serializable {
     private Long id;
 
     private String nome;
-    private Long crm;
-    private BigInteger telefone;
-    private BigInteger celular;
+
+    @Column(unique = true)
+    private Integer crm;
+
+    @Column(unique = true)
+    private Integer telefoneFixo;
+
+    @Column(unique = true)
+    private Integer celular;
+
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+
 
 
     @ManyToMany

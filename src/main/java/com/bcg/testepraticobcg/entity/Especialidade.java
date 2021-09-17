@@ -26,7 +26,7 @@ public class Especialidade implements Serializable {
 
     private String nome;
 
-    @ManyToMany( mappedBy = "especialidades")
+    @ManyToMany(mappedBy = "especialidades")
     private Set<Medico> medicos = new HashSet<>();
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
