@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Set;
 
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
 public class MedicoDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,11 +26,11 @@ public class MedicoDTO implements Serializable {
     @Length(min = 5,  max = 120, message = "tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
 
-    @Digits(integer = 7, message = "No maximo 7 digitos", fraction = 0)
+    @Digits(integer = 7, message = "No máximo 7 números", fraction = 0)
     private Integer crm;
 
     @NotEmpty(message = "Não pode ser vazio")
-    private Integer telefoneFixo;
+    private Long telefoneFixo;
 
     @NotEmpty(message = "Não pode ser vazio")
     private Long celular;

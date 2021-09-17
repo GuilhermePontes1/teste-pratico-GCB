@@ -38,6 +38,16 @@ public class MedicoService {
 
     }
 
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Id not  found : " + id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Database violation");
+        }
+    }
+
     @Transactional
     public MedicoDTO update(Long id, MedicoDTO dto) {
         try {
@@ -49,17 +59,6 @@ public class MedicoService {
         }
 
     }
-
-    public void delete(Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Id not  found : " + id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Database violation");
-        }
-    }
-
     @Transactional(readOnly = true)
     public List<MedicoDTO> findAll() {
         return repository.findAll().stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
@@ -78,8 +77,8 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
-    public MedicoDTO findByCrm(Integer crm) {
-        Medico aux = repository.findByCrm(crm);
+    public MedicoDTO findByTelefoneFixo(Long telFixo) {
+        Medico aux = repository.findByTelefoneFixo(telFixo);
         if (aux == null) {
             throw new ResourceNotFoundException("A entidade não foi localizada");
         }
@@ -87,8 +86,8 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
-    public MedicoDTO findByTelefoneFixo(Long telFixo) {
-        Medico aux = repository.findByTelefoneFixo(telFixo);
+    public MedicoDTO findByCrm(Integer crm) {
+        Medico aux = repository.findByCrm(crm);
         if (aux == null) {
             throw new ResourceNotFoundException("A entidade não foi localizada");
         }
@@ -103,14 +102,6 @@ public class MedicoService {
         }
         return new MedicoDTO(aux, aux.getEspecialidades());
     }
-
-    @Transactional(readOnly = true)
-    public List<MedicoDTO> findByCep(Integer cep) {
-        return repository.findByCep(cep).stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
-                .collect(Collectors.toList());
-
-    }
-
     @Transactional(readOnly = true)
     public List<MedicoDTO> findByLogradouro(String logradouro) {
         return repository.findByLogradouroIgnoreCase(logradouro).stream()
@@ -119,16 +110,22 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
-    public List<MedicoDTO> findByComplemento(String complemento) {
-        return repository.findByComplementoIgnoreCase(complemento).stream()
-                .map(x -> new MedicoDTO(x, x.getEspecialidades())).collect(Collectors.toList());
+    public List<MedicoDTO> findByCep(Integer cep) {
+        return repository.findByCep(cep).stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
+                .collect(Collectors.toList());
 
     }
-
     @Transactional(readOnly = true)
     public List<MedicoDTO> findByBairro(String bairro) {
         return repository.findByBairroIgnoreCase(bairro).stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MedicoDTO> findByComplemento(String complemento) {
+        return repository.findByComplementoIgnoreCase(complemento).stream()
+                .map(x -> new MedicoDTO(x, x.getEspecialidades())).collect(Collectors.toList());
+
     }
 
     @Transactional(readOnly = true)
@@ -143,7 +140,7 @@ public class MedicoService {
                 .collect(Collectors.toList());
 
     }
-    // Auxiliary Methods
+
 
     private Medico copyDtoToEntity(Medico entity, MedicoDTO dto) {
         entity.setNome(dto.getNome());

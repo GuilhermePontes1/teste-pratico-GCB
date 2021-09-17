@@ -3,17 +3,10 @@ package com.bcg.testepraticobcg.viacep;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
-
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@ToString
-@RequiredArgsConstructor
-
 @Service
 public class EnderecoDTO {
 
@@ -23,6 +16,5 @@ public class EnderecoDTO {
     private String bairro;
     private String localidade;
     private String uf;
-
 
 }
