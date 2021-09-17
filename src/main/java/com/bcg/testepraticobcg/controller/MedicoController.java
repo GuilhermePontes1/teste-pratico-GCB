@@ -22,6 +22,7 @@ public class MedicoController {
     public ResponseEntity<List<MedicoDTO>> findAll() {
         return ResponseEntity.ok().body(service.findAll());
     }
+
     @PostMapping
     public ResponseEntity<MedicoDTO> save(@Valid @RequestBody MedicoDTO dto)  {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
