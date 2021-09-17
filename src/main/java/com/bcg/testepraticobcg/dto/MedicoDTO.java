@@ -5,8 +5,7 @@ import com.bcg.testepraticobcg.entity.Medico;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +25,13 @@ public class MedicoDTO implements Serializable {
     @Length(min = 5,  max = 120, message = "tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
 
-    @Digits(integer = 7, message = "No máximo 7 números", fraction = 0)
+    @Length(max = 7, message = " o CRM tem que ser no máximo de 7 digitos")
     private Integer crm;
 
-    @NotEmpty(message = "Não pode ser vazio")
+
     private Long telefoneFixo;
 
-    @NotEmpty(message = "Não pode ser vazio")
-    private Long celular;
+    private Long telefoneCelular;
 
     private String logradouro;
     private String complemento;
@@ -50,7 +48,7 @@ public class MedicoDTO implements Serializable {
         nome = entity.getNome();
         crm = entity.getCrm();
         telefoneFixo = entity.getTelefoneFixo();
-        celular = entity.getCelular();
+        telefoneCelular = entity.getTelefoneCelular();
         cep = entity.getCep();
         logradouro = entity.getLogradouro();
         complemento = entity.getComplemento();

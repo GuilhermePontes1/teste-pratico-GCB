@@ -32,7 +32,7 @@ public class Medico implements Serializable {
     private Long telefoneFixo;
 
     @Column(unique = true)
-    private Long celular;
+    private Long telefoneCelular;
 
     private Integer cep;
     private String logradouro;

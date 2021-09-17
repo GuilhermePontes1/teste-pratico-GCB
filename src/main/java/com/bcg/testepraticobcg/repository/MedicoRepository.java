@@ -11,7 +11,7 @@ public interface MedicoRepository  extends JpaRepository<Medico, Long> {
 
     Medico findByTelefoneFixo(Long telefoneFixo);
 
-    Medico findByCelular(Long celular);
+    Medico findByTelefoneCelular(Long telefoneCelular);
 
     List<Medico> findByCep(Integer cep);
 

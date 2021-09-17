@@ -32,7 +32,7 @@ public class MedicoService {
     @Transactional
     public MedicoDTO save(MedicoDTO dto) {
         Medico entity = new Medico();
-        copyDtoToEntity(entity, dto);
+        copyDtoEntity(entity, dto);
         repository.save(entity);
         return new MedicoDTO(entity, entity.getEspecialidades());
 
@@ -77,8 +77,8 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
-    public MedicoDTO findByTelefoneFixo(Long telFixo) {
-        Medico aux = repository.findByTelefoneFixo(telFixo);
+    public MedicoDTO findByTelefoneFixo(Long telefoneFixo) {
+        Medico aux = repository.findByTelefoneFixo(telefoneFixo);
         if (aux == null) {
             throw new ResourceNotFoundException("A entidade não foi localizada");
         }
@@ -95,8 +95,8 @@ public class MedicoService {
     }
 
     @Transactional(readOnly = true)
-    public MedicoDTO findByTelefoneCelular(Long celular) {
-        Medico aux = repository.findByCelular(celular);
+    public MedicoDTO findByTelefoneCelular(Long telefoneCelular) {
+        Medico aux = repository.findByTelefoneCelular(telefoneCelular);
         if (aux == null) {
             throw new ResourceNotFoundException("A entidade não foi localizada");
         }
@@ -142,11 +142,11 @@ public class MedicoService {
     }
 
 
-    private Medico copyDtoToEntity(Medico entity, MedicoDTO dto) {
+    private void copyDtoEntity(Medico entity, MedicoDTO dto) {
         entity.setNome(dto.getNome());
         entity.setCrm(dto.getCrm());
         entity.setTelefoneFixo(dto.getTelefoneFixo());
-        entity.setCelular(dto.getCelular());
+        entity.setTelefoneCelular(dto.getTelefoneCelular());
         entity.setCep(dto.getCep());
         EnderecoDTO enderecoDTO = viaCepWbService.viaCEPWebService(entity.getCep());
         entity.setLogradouro(enderecoDTO.getLogradouro());
@@ -160,7 +160,6 @@ public class MedicoService {
             entity.getEspecialidades().add(aux);
         }
 
-        return entity;
     }
 
     private Medico updateAux(Long id, MedicoDTO dto) {
@@ -168,7 +167,7 @@ public class MedicoService {
         entity.setNome(dto.getNome());
         entity.setCrm(dto.getCrm());
         entity.setTelefoneFixo(dto.getTelefoneFixo());
-        entity.setCelular(dto.getCelular());
+        entity.setTelefoneCelular(dto.getTelefoneCelular());
         entity.setCep(dto.getCep());
         EnderecoDTO enderecoDTO = viaCepWbService.viaCEPWebService(entity.getCep());
         entity.setLogradouro(enderecoDTO.getLogradouro());

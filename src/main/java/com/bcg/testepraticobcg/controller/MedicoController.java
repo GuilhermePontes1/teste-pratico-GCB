@@ -59,9 +59,9 @@ public class MedicoController {
     public ResponseEntity<MedicoDTO> findByCrm(@PathVariable Integer crm) {
         return ResponseEntity.ok().body(service.findByCrm(crm));
     }
-    @GetMapping(value = "/by-celular/{celular}")
-    public ResponseEntity<MedicoDTO> findByCelular(@PathVariable Long celular) {
-        return ResponseEntity.ok().body(service.findByTelefoneCelular(celular));
+    @GetMapping(value = "/by-telefoneCelular/{telefoneCelular}")
+    public ResponseEntity<MedicoDTO> findByTelefoneCelular(@PathVariable Long telefoneCelular) {
+        return ResponseEntity.ok().body(service.findByTelefoneCelular(telefoneCelular));
     }
 
     @GetMapping(value = "/by-logradouro/{logradouro}")

@@ -21,8 +21,7 @@ public class ViaCEPWebService {
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("cep", cep.toString());
         System.out.println(baseUrl + "/{cep}" + type);
-        ResponseEntity<EnderecoDTO> result = restTemplate.getForEntity(baseUrl + "/{cep}" + type, EnderecoDTO.class,
-                uriVariables);
+        ResponseEntity<EnderecoDTO> result = restTemplate.getForEntity(baseUrl + "/{cep}" + type, EnderecoDTO.class, uriVariables);
         return result.getBody();
     }
 }
