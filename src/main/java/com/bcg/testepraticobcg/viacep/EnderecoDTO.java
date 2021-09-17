@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 @Service
 public class EnderecoDTO {
 
+    private Integer cep;
     private String logradouro;
     private String complemento;
     private String bairro;

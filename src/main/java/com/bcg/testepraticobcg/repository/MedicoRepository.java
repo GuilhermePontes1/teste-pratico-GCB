@@ -2,7 +2,6 @@ package com.bcg.testepraticobcg.repository;
 
 import com.bcg.testepraticobcg.entity.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
 public interface MedicoRepository  extends JpaRepository<Medico, Long> {
@@ -10,9 +9,9 @@ public interface MedicoRepository  extends JpaRepository<Medico, Long> {
 
     Medico findByCrm(Integer crm);
 
-    Medico findByTelefoneFixo(Long telFixo);
+    Medico findByTelefoneFixo(Long telefoneFixo);
 
-    Medico findByCelular(Long telCelular);
+    Medico findByCelular(Long celular);
 
     List<Medico> findByCep(Integer cep);
 

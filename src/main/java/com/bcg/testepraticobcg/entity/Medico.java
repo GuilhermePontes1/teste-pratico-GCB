@@ -5,7 +5,6 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -35,8 +34,9 @@ public class Medico implements Serializable {
     private Integer telefoneFixo;
 
     @Column(unique = true)
-    private Integer celular;
+    private Long celular;
 
+    private Integer cep;
     private String logradouro;
     private String complemento;
     private String bairro;
