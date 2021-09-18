@@ -14,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utils.ValidatingMinimumSpecialization;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -33,6 +34,7 @@ public class MedicoService {
     public MedicoDTO save(MedicoDTO dto) {
         Medico entity = new Medico();
         copyDtoEntity(entity, dto);
+        ValidatingMinimumSpecialization.validating(dto);
         repository.save(entity);
         return new MedicoDTO(entity, entity.getEspecialidades());
 

@@ -5,7 +5,7 @@ import com.bcg.testepraticobcg.entity.Medico;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-
+import javax.validation.constraints.Digits;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +25,11 @@ public class MedicoDTO implements Serializable {
     @Length(min = 5,  max = 120, message = "tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
 
-    @Length(max = 7, message = " o CRM tem que ser no máximo de 7 digitos")
+    @Digits(integer = 7, message = "No máximo 7 números", fraction = 0)
     private Integer crm;
 
-
     private Long telefoneFixo;
-
     private Long telefoneCelular;
-
     private String logradouro;
     private String complemento;
     private String bairro;
