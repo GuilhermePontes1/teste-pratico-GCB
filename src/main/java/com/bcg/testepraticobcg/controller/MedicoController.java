@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -34,59 +33,65 @@ public class MedicoController {
         return ResponseEntity.ok().body(service.update(id, dto));
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/soft-delete/{id}")
+    public ResponseEntity<Void> softDelete(@PathVariable Long id) {
+        service.softDelete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "/by-id/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<MedicoDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
-    @GetMapping(value = "/by-nome/{nome}")
+    @GetMapping(value = "/nome/{nome}")
     public ResponseEntity<List<MedicoDTO>> findByNome(@PathVariable String nome) {
         return ResponseEntity.ok().body(service.findByNome(nome));
     }
 
-    @GetMapping(value = "/by-telefoneFixo/{telefoneFixo}")
+    @GetMapping(value = "/telefoneFixo/{telefoneFixo}")
     public ResponseEntity<MedicoDTO> findByTelefoneFixo(@PathVariable Long telefoneFixo) {
         return ResponseEntity.ok().body(service.findByTelefoneFixo(telefoneFixo));
     }
 
-    @GetMapping(value = "/by-crm/{crm}")
+    @GetMapping(value = "/crm/{crm}")
     public ResponseEntity<MedicoDTO> findByCrm(@PathVariable Integer crm) {
         return ResponseEntity.ok().body(service.findByCrm(crm));
     }
-    @GetMapping(value = "/by-telefoneCelular/{telefoneCelular}")
+    @GetMapping(value = "/elefoneCelular/{telefoneCelular}")
     public ResponseEntity<MedicoDTO> findByTelefoneCelular(@PathVariable Long telefoneCelular) {
         return ResponseEntity.ok().body(service.findByTelefoneCelular(telefoneCelular));
     }
 
-    @GetMapping(value = "/by-logradouro/{logradouro}")
+    @GetMapping(value = "/logradouro/{logradouro}")
     public ResponseEntity<List<MedicoDTO>> findByLogradouro(@PathVariable String logradouro) {
         return ResponseEntity.ok().body(service.findByLogradouro(logradouro));
     }
 
-    @GetMapping(value = "/by-bairro/{bairro}")
+    @GetMapping(value = "/bairro/{bairro}")
     public ResponseEntity<List<MedicoDTO>> findByBairro(@PathVariable String bairro) {
         return ResponseEntity.ok().body(service.findByBairro(bairro));
     }
-    @GetMapping(value = "/by-cep/{cep}")
+    @GetMapping(value = "/cep/{cep}")
     public ResponseEntity<List<MedicoDTO>> findByCep(@PathVariable Integer cep) {
         return ResponseEntity.ok().body(service.findByCep(cep));
     }
 
-    @GetMapping(value = "/by-complemento/{complemento}")
+    @GetMapping(value = "/complemento/{complemento}")
     public ResponseEntity<List<MedicoDTO>> findByComplemento(@PathVariable String complemento) {
         return ResponseEntity.ok().body(service.findByComplemento(complemento));
     }
-    @GetMapping(value = "/by-uf/{uf}")
+    @GetMapping(value = "/uf/{uf}")
     public ResponseEntity<List<MedicoDTO>> findByUf(@PathVariable String uf) {
         return ResponseEntity.ok().body(service.findByUf(uf));
     }
-    @GetMapping(value = "/by-localidade/{localidade}")
+    @GetMapping(value = "/localidade/{localidade}")
     public ResponseEntity<List<MedicoDTO>> findByLocalidade(@PathVariable String localidade) {
         return ResponseEntity.ok().body(service.findByLocalidade(localidade));
     }

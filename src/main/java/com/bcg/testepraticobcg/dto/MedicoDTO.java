@@ -5,13 +5,14 @@ import com.bcg.testepraticobcg.entity.Medico;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +23,7 @@ public class MedicoDTO implements Serializable {
 
     private Long id;
 
-    @Length(min = 5,  max = 120, message = "tamanho deve ser entre 5 e 120 caracteres")
+    @Length(max = 120, message = "tamanho deve ser entre 5 e 120 caracteres")
     private String nome;
 
     @Digits(integer = 7, message = "No máximo 7 números", fraction = 0)
@@ -36,7 +37,7 @@ public class MedicoDTO implements Serializable {
     private String localidade;
     private String uf;
     private Integer cep;
-
+    private boolean softDelete;
 
     private List<EspecialidadeDTO> especialidades = new ArrayList<>();
 
@@ -52,6 +53,8 @@ public class MedicoDTO implements Serializable {
         bairro = entity.getBairro();
         localidade = entity.getLocalidade();
         uf = entity.getUf();
+        //softDelete = false;
+
     }
 
     public MedicoDTO(Medico entity, Set<Especialidade> especialidadesEntity) {

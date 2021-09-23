@@ -1,4 +1,5 @@
 package com.bcg.testepraticobcg.service;
+
 import com.bcg.testepraticobcg.dto.EspecialidadeDTO;
 import com.bcg.testepraticobcg.dto.MedicoDTO;
 import com.bcg.testepraticobcg.entity.Especialidade;
@@ -15,14 +16,15 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utils.ValidatingMinimumSpecialization;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
 @Service
 public class MedicoService {
+
     @Autowired
     private MedicoRepository repository;
     @Autowired
@@ -32,21 +34,42 @@ public class MedicoService {
 
     @Transactional
     public MedicoDTO save(MedicoDTO dto) {
-        Medico entity = new Medico();
-        copyDtoEntity(entity, dto);
-        ValidatingMinimumSpecialization.validating(dto);
-        repository.save(entity);
-        return new MedicoDTO(entity, entity.getEspecialidades());
+
+            Medico entity = new Medico();
+            copyDtoEntity(entity, dto);
+            ValidatingMinimumSpecialization.validating(dto);
+            repository.save(entity);
+            return new MedicoDTO(entity, entity.getEspecialidades());
 
     }
-
-    public void delete(Long id) {
+    @Transactional
+    public void delete(Long id) { // metodo delete comum
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Id not  found : " + id);
+            throw new ResourceNotFoundException("Id não encontrado : " + id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Database violation");
+            throw new DatabaseException("Violação de banco de dados");
+        }
+
+    }
+    /* -(SoftDelete)
+        Criar o metodo
+       -Buscar o registro
+       -Verificar se a tag/flag está ativa ou não (Levantar exception)
+       -uptade para colocar a tag inativa = true, ativa = false
+
+        IMPACTO = APLICAR O FILTRO EM TODOS OS METODOS DE BUSCA.
+    *  */
+    @Transactional
+    public void softDelete(Long id) {
+        try {
+
+            Medico aux = repository.getById(id);
+            aux.setSoftDelete(true);
+
+        } catch (ResourceNotFoundException | NoSuchElementException e) {
+            throw new ResourceNotFoundException("Entidade já deletada");
         }
     }
 
@@ -57,25 +80,28 @@ public class MedicoService {
             repository.save(aux);
             return new MedicoDTO(aux, aux.getEspecialidades());
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id not found :" + id);
+            throw new ResourceNotFoundException("Id não encontrado :" + id);
         }
 
     }
+
+
     @Transactional(readOnly = true)
     public List<MedicoDTO> findAll() {
-        return repository.findAll().stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
+        return repository.findAll().stream().filter(x -> !x.isSoftDelete()).map(x -> new MedicoDTO(x, x.getEspecialidades()))
                 .collect(Collectors.toList());
     }
 
+
     @Transactional(readOnly = true)
     public MedicoDTO findById(Long id) {
-        return repository.findById(id).map(x -> new MedicoDTO(x, x.getEspecialidades()))
-                .orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada)"));
+        return repository.findById(id).filter(x -> !x.isSoftDelete()).map(x -> new MedicoDTO(x, x.getEspecialidades()))
+                .orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
     }
 
     @Transactional(readOnly = true)
     public List<MedicoDTO> findByNome(String nome) {
-        return repository.findByNomeIgnoreCase(nome).stream().map(x-> new MedicoDTO(x,x.getEspecialidades())).collect(Collectors.toList());
+        return repository.findByNomeIgnoreCase(nome).stream().map(x -> new MedicoDTO(x, x.getEspecialidades())).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -104,6 +130,7 @@ public class MedicoService {
         }
         return new MedicoDTO(aux, aux.getEspecialidades());
     }
+
     @Transactional(readOnly = true)
     public List<MedicoDTO> findByLogradouro(String logradouro) {
         return repository.findByLogradouroIgnoreCase(logradouro).stream()
@@ -117,6 +144,7 @@ public class MedicoService {
                 .collect(Collectors.toList());
 
     }
+
     @Transactional(readOnly = true)
     public List<MedicoDTO> findByBairro(String bairro) {
         return repository.findByBairroIgnoreCase(bairro).stream().map(x -> new MedicoDTO(x, x.getEspecialidades()))
@@ -150,6 +178,7 @@ public class MedicoService {
         entity.setTelefoneFixo(dto.getTelefoneFixo());
         entity.setTelefoneCelular(dto.getTelefoneCelular());
         entity.setCep(dto.getCep());
+        entity.setSoftDelete(false);
         EnderecoDTO enderecoDTO = viaCepWbService.viaCEPWebService(entity.getCep());
         entity.setLogradouro(enderecoDTO.getLogradouro());
         entity.setComplemento(enderecoDTO.getComplemento());
@@ -171,6 +200,7 @@ public class MedicoService {
         entity.setTelefoneFixo(dto.getTelefoneFixo());
         entity.setTelefoneCelular(dto.getTelefoneCelular());
         entity.setCep(dto.getCep());
+        entity.setSoftDelete(false);
         EnderecoDTO enderecoDTO = viaCepWbService.viaCEPWebService(entity.getCep());
         entity.setLogradouro(enderecoDTO.getLogradouro());
         entity.setComplemento(enderecoDTO.getComplemento());

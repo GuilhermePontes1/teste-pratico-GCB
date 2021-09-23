@@ -15,7 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 @Entity
 @Table(name = "tb_medico")
 public class Medico implements Serializable {
@@ -54,6 +54,8 @@ public class Medico implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_medico_especialidade", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "especialidade_id"))
     private Set<Especialidade> especialidades= new HashSet<>();
+
+    boolean softDelete; // softDelete
 
 }
 
