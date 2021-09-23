@@ -43,7 +43,7 @@ public class MedicoService {
 
     }
     @Transactional
-    public void delete(Long id) { // metodo delete comum
+    public void delete(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -53,14 +53,7 @@ public class MedicoService {
         }
 
     }
-    /* -(SoftDelete)
-        Criar o metodo
-       -Buscar o registro
-       -Verificar se a tag/flag está ativa ou não (Levantar exception)
-       -uptade para colocar a tag inativa = true, ativa = false
 
-        IMPACTO = APLICAR O FILTRO EM TODOS OS METODOS DE BUSCA.
-    *  */
     @Transactional
     public void softDelete(Long id) {
         try {
