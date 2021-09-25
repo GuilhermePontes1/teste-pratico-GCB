@@ -32,16 +32,16 @@
 #### •	Estruturação de banco de dados MySQL
 
 ### Ferramentas para serem utilizadas no desenvolvimento
-### -	Migrations e Seeds
-### -	SpringBoot
-### -	Hibernate
+### •	Migrations e Seeds
+### •	SpringBoot
+### •	Hibernate
 
 ### No banco de dados devem estar cadastradas as seguintes especialidades:
-#### -	Alergologia
-#### -	Angiologia
-#### -	Buco maxilo
-#### -	Cardiologia clínca
-#### -	Cardiologia infantil
-#### -	Cirurgia cabeça e pescoço
-#### -	Cirurgia cardíaca
-#### -	Cirurgia de tórax
+#### •	Alergologia
+#### •	Angiologia
+#### •	Buco maxilo
+#### •	Cardiologia clínca
+#### •	Cardiologia infantil
+#### • Cirurgia cabeça e pescoço
+#### •	Cirurgia cardíaca
+#### •	Cirurgia de tórax
