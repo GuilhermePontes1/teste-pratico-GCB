@@ -37,11 +37,11 @@
 ### -	Hibernate
 
 ### No banco de dados devem estar cadastradas as seguintes especialidades:
-### -	Alergologia
-### -	Angiologia
-### -	Buco maxilo
-### -	Cardiologia clínca
-### -	Cardiologia infantil
-### -	Cirurgia cabeça e pescoço
-### -	Cirurgia cardíaca
-### -	Cirurgia de tórax
+#### -	Alergologia
+#### -	Angiologia
+#### -	Buco maxilo
+#### -	Cardiologia clínca
+#### -	Cardiologia infantil
+#### -	Cirurgia cabeça e pescoço
+#### -	Cirurgia cardíaca
+#### -	Cirurgia de tórax
