@@ -31,12 +31,12 @@
 #### •	Testes "end to end"
 #### •	Estruturação de banco de dados MySQL
 
-## Ferramentas para serem utilizadas no desenvolvimento
+### Ferramentas para serem utilizadas no desenvolvimento
 ### -	Migrations e Seeds
 ### -	SpringBoot
 ### -	Hibernate
 
-## No banco de dados devem estar cadastradas as seguintes especialidades:
+### No banco de dados devem estar cadastradas as seguintes especialidades:
 ### -	Alergologia
 ### -	Angiologia
 ### -	Buco maxilo
