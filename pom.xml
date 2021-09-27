@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bcg</groupId>
-    <artifactId>teste-pratico-bcg</artifactId>
+    <artifactId>teste-pratico-gcb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>teste-pratico-bcg</name>
-    <description>teste-pratico-bcg</description>
+    <name>teste-pratico-gcb</name>
+    <description>teste-pratico-gcb</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -36,10 +36,10 @@
         </dependency>
 
         <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
-        <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -86,7 +86,9 @@
         </dependency>
     </dependencies>
 
+
     <build>
+        <finalName>teste-pratico-gcb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
