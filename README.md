@@ -1,5 +1,9 @@
 ##  <p align = center> Teste Prático GCB </p> <p align = "center"> 
 
+ ### Link para documentação: [End-Points](https://github.com/GuilhermePontes1/teste-pratico-GCB/wiki/End-points-para-API:-teste-pratico-GCB)
+   
+  OBS: Infelizmente não foi possível utilizar o docker-compose, será necessário fazer um import de um arquivo SQL para que funcione no MySQL, o nome dele é export.sql, localizado na pasta resources 
+  
 ## Requisitos cumpridos:
 
 ### Desenvolver um sistema que faça a gestão de cadastros de médicos. O Sistema deve suportar as seguintes operações:
@@ -45,3 +49,4 @@
 #### • Cirurgia cabeça e pescoço
 #### •	Cirurgia cardíaca
 #### •	Cirurgia de tórax
+  
