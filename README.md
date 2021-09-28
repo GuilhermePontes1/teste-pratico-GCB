@@ -2,7 +2,6 @@
 
  ### Link para documentação: [End-Points](https://github.com/GuilhermePontes1/teste-pratico-GCB/wiki/End-points-para-API:-teste-pratico-GCB)
    
-  OBS: Infelizmente não foi possível utilizar o docker-compose, será necessário fazer um import de um arquivo SQL para que funcione no MySQL, o nome dele é export.sql, localizado na pasta resources 
   
 ## Requisitos cumpridos:
 
