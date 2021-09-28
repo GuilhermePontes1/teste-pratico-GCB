@@ -2,12 +2,12 @@ package com.bcg.testepraticobcg.dto;
 
 import com.bcg.testepraticobcg.entity.Especialidade;
 import com.bcg.testepraticobcg.entity.Medico;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import java.io.Serializable;
 import java.util.ArrayList;

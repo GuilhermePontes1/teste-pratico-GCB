@@ -1,10 +1,12 @@
 package com.bcg.testepraticobcg.controller;
+
 import com.bcg.testepraticobcg.dto.MedicoDTO;
 import com.bcg.testepraticobcg.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
